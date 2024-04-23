@@ -1,25 +1,35 @@
 #!/usr/bin/env python3
 """
-Module: 3-tasks
+Module: 2-measure_runtime
 
-This module provides a function to create an asyncio.Task object for
-the wait_random coroutine.
+This module provides a function to measure the total execution time for
+wait_n(n, max_delay),
+and return the average time per iteration.
+
+It imports wait_n from 1-concurrent_coroutines module to perform
+the measurement.
 """
 
-import asyncio
-from typing import Task
-from 0-basic_async_syntax import wait_random
+
+from typing import List
+from time import perf_counter
+from concurrent_coroutines import wait_n
 
 
-def task_wait_random(max_delay: int) -> Task:
+async def measure_time(n: int, max_delay: int) -> float:
     """
-    Function that takes an integer max_delay and returns an asyncio.Task
-    for the wait_random coroutine.
+    Measures the total execution time for wait_n(n, max_delay), and
+    returns total_time / n.
 
     Parameters:
+        n (int): Number of times to spawn wait_random.
         max_delay (int): Maximum delay value.
 
     Returns:
-        Task: An asyncio.Task object.
+        float: Average execution time per operation.
     """
-    return asyncio.create_task(wait_random(max_delay))
+    start_time = perf_counter()
+    await wait_n(n, max_delay)
+    end_time = perf_counter()
+    total_time = end_time - start_time
+    return total_time / n
