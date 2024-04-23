@@ -3,6 +3,7 @@
 This script measures the total runtime of executing async_comprehension four
 times in parallel using asyncio.gather.
 """
+
 import asyncio
 from typing import List
 from time import perf_counter
