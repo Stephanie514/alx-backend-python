@@ -12,7 +12,6 @@ from time import perf_counter
 from typing import List
 from concurrent_coroutines import wait_n
 
-
 async def measure_time(n: int, max_delay: int) -> float:
     """
     Measures the total execution time for wait_n(n, max_delay), and
@@ -26,7 +25,13 @@ async def measure_time(n: int, max_delay: int) -> float:
         float: Average execution time per operation.
     """
     start_time = perf_counter()
-    await wait_n(n, max_delay)
+    await asyncio.gather(wait_n(n, max_delay))
     end_time = perf_counter()
     total_time = end_time - start_time
     return total_time / n
+
+if __name__ == "__main__":
+    n = 5
+    max_delay = 3
+    result = asyncio.run(measure_time(n, max_delay))
+    print(result)
