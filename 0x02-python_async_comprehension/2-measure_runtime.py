@@ -6,8 +6,6 @@ times in parallel using asyncio.gather.
 import asyncio
 from typing import List
 from time import perf_counter
-
-
 from async_comprehension import async_comprehension
 
 
@@ -31,9 +29,3 @@ async def measure_runtime() -> float:
     end_time = perf_counter()
     total_runtime = end_time - start_time
     return total_runtime
-
-
-async def main():
-    return await measure_runtime()
-
-print(asyncio.run(main()))
