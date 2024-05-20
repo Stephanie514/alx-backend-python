@@ -2,7 +2,6 @@
 """
 This tests for utils.py module
 """
-from unittest.mock import patch, Mock
 from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 import unittest
@@ -20,7 +19,7 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(self, nested_map, path, expected_result):
         """
-        This test access_nested_map function.
+        Test access_nested_map function.
         """
         self.assertEqual(access_nested_map(nested_map, path), expected_result)
 
@@ -34,7 +33,6 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         Test access_nested_map function with exceptions.
         """
-        # Asserting that a KeyError is raised with the expected message
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
         self.assertEqual(str(context.exception), expected_exception_message)
